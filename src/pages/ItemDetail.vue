@@ -1,5 +1,4 @@
 <template>
-    <Header><router-link to="/coins" class="navigation-link">Список криптомонет</router-link></Header>
     <div class=detail>
       <div>
         <h1>{{ bitcoin.name }} </h1>
@@ -57,16 +56,6 @@ const id = useRoute().params.id; //bitcoin
 .discr {
   margin-top: 20px;
 }
-
-.navigation-link {
-  color: #333;
-  text-decoration: none;
-}
-
-.navigation-link:hover {
-  color: #555;
-}
-
 h1 {
   text-align: center;
   font-size: 24px;

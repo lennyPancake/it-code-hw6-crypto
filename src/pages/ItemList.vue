@@ -1,6 +1,4 @@
 <template>
-  <Header>
-  </Header>
   <h1>Список криптомонет</h1>
   <div class="item-list">
     <el-card v-for="item in items" :key="item.id" class="item-card">

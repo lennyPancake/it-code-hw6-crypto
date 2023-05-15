@@ -3,11 +3,13 @@
       <div class="container">
         <h2 class="logo">Crypto</h2>
         <nav class="navigation">
-          <slot></slot>
+          <router-link to="/coins" v-if="!($route.path==='/coins')" class="navigation-link">Список криптомонет</router-link>
         </nav>
       </div>
     </header>
 </template>
+<script setup lang="ts">
+</script>
 <style lang="scss" scoped>
 
   .header {
@@ -35,6 +37,13 @@
   .navigation {
     display: flex;
   }
-  
+  .navigation-link {
+  color: #333;
+  text-decoration: none;
+}
+
+.navigation-link:hover {
+  color: #555;
+}
   </style>
   
