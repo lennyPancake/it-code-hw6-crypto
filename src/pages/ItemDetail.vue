@@ -40,7 +40,7 @@ makeRequest({  // Используем функцию-обертку
   method: "get",                              // Указываем метод
   url: "https://api.coingecko.com/api/v3/coins/"+id,  // Указываем путь
 }).then(({data}) => {      
-  coin.value=data;                             // После запроса нам приходит объект из которого мы достаем поле data                                  // И присваиваем его к нашим тудушкам
+  coin.value=data;
 });
 </script>
 <style lang="scss" scoped>
