@@ -28,6 +28,7 @@
   }
   
   .logo {
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
     font-weight: bold;
     color: rgb(3, 8, 8);

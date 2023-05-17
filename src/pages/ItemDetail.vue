@@ -1,37 +1,47 @@
 <template>
     <div class=detail>
       <div>
-        <h1>{{ bitcoin.name }} </h1>
-        <h3>{{ bitcoin.localization["ru"] }}</h3>
-        <img :src="bitcoin.image['large']" class="item-image">
+        <h1>{{ coin.name }} </h1>
+        <h3>{{ coin.localization["ru"] }}</h3>
+        <img :src="coin.image['large']" class="item-image">
       </div>
         <el-descriptions
     class="margin-top"
     title="Общие сведения"
   >
-    <el-descriptions-item label="Рыночная капитализация: ">{{ bitcoin.market_data.market_cap["usd"].toLocaleString()  }}$</el-descriptions-item>
-    <el-descriptions-item label="Цена: ">{{ bitcoin.market_data.current_price['usd'].toLocaleString() }}$</el-descriptions-item>
-    <el-descriptions-item label="Общее количество: ">{{bitcoin.market_data.total_supply.toLocaleString()}}</el-descriptions-item>
-    <el-descriptions-item label="Максимальное количество: ">{{bitcoin.market_data.max_supply.toLocaleString()}}</el-descriptions-item>
-    <el-descriptions-item label="В обращении: ">{{bitcoin.market_data.circulating_supply.toLocaleString()}}</el-descriptions-item>
+    <el-descriptions-item label="Рыночная капитализация: ">{{ coin.market_data.market_cap["usd"].toLocaleString()  }}$</el-descriptions-item>
+    <el-descriptions-item label="Цена: ">{{ coin.market_data.current_price['usd'].toLocaleString()}} $</el-descriptions-item>
+    <el-descriptions-item label="Общее количество: ">{{maxSupply(coin.market_data.total_supply)}}</el-descriptions-item>
+    <el-descriptions-item label="Максимальное количество: ">{{maxSupply(coin.market_data.max_supply)}}</el-descriptions-item>
+    <el-descriptions-item label="В обращении: ">{{coin.market_data.circulating_supply.toLocaleString()}}</el-descriptions-item>
     <el-descriptions-item label="Сайт: "
-      ><a :href=bitcoin.links.homepage[0]>{{ bitcoin.links.homepage[0] }}</a>
+      ><a :href=coin.links.homepage[0]>{{ coin.links.homepage[0] }}</a>
     </el-descriptions-item>
   </el-descriptions>
   <div class="discr">
   <h3>Описание</h3>
   <h4>
-  <span style="font-weight: normal;" v-html="bitcoin.description['en']"></span>
+  <span style="font-weight: normal;" v-html="coin.description['en']"></span>
 </h4>
 </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import Header from '../components/Header.vue'
 import { useRoute } from 'vue-router';
-import { bitcoin} from '../api/bitcoin.js';
-const id = useRoute().params.id; //bitcoin
+import makeRequest from '../utils/makeRequest';
+import maxSupply from '../utils/maxSupply'
+import { ref } from 'vue';
+
+
+const id = useRoute().params.id; //coin
+const coin = ref([])
+makeRequest({  // Используем функцию-обертку
+  method: "get",                              // Указываем метод
+  url: "https://api.coingecko.com/api/v3/coins/"+id,  // Указываем путь
+}).then(({data}) => {      
+  coin.value=data;                             // После запроса нам приходит объект из которого мы достаем поле data                                  // И присваиваем его к нашим тудушкам
+});
 </script>
 <style lang="scss" scoped>
 .detail {
