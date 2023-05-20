@@ -1,9 +1,10 @@
 <template>
     <header class="header">
       <div class="container">
-        <h2 class="logo">Crypto</h2>
+        <h2 class="logo">Crypto</h2>  
         <nav class="navigation">
-          <router-link to="/coins" v-if="!($route.path==='/coins')" class="navigation-link">Список криптомонет</router-link>
+          <router-link to="/coins" v-if="!($route.path==='/coins')" class="navigation-link">Поиск криптомонет</router-link>
+          <router-link to="/coins/categories" v-if="!($route.path==='/coins/categories')" class="navigation-link">Категории криптомонет</router-link>
         </nav>
       </div>
     </header>
@@ -41,6 +42,7 @@
   .navigation-link {
   color: #333;
   text-decoration: none;
+  margin: 10px  ;
 }
 
 .navigation-link:hover {
